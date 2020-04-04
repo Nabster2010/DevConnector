@@ -1,3 +1,4 @@
 {
-	"mongoURI": "mongodb+srv://nabster2010:nabster2010@devconnector-nhbhj.mongodb.net/test?retryWrites=true&w=majority"
+	"mongoURI": "mongodb://127.0.0.1:27017",
+	"jwtSecret": "my secret"
 }

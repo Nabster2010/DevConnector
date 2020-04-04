@@ -5,7 +5,7 @@
 	"main": "server.js",
 	"scripts": {
 		"start": "node server",
-		"server": "nodemon serrver"
+		"server": "nodemon server"
 	},
 	"author": "Garhey",
 	"license": "MIT",
@@ -16,6 +16,7 @@
 		"express-validator": "^6.4.0",
 		"gravatar": "^1.8.0",
 		"jsonwebtoken": "^8.5.1",
+		"mongodb": "^3.5.5",
 		"mongoose": "^5.9.7",
 		"request": "^2.88.2"
 	},
