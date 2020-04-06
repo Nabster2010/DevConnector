@@ -1,4 +1,7 @@
 {
 	"mongoURI": "mongodb://127.0.0.1:27017",
-	"jwtSecret": "my secret"
+	"jwtSecret": "my secret",
+	"githupClientId": "cbbc0c405ba1632f1b9f",
+	"githupSecret": "783e4c953dd6b58c429322d009baad936e442198",
+	"githubToken": "0f0457caed3bde05038c30eea0fbb32218e492fa"
 }
