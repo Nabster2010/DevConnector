@@ -1,7 +1,14 @@
 import React, { Fragment, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
+
+//------
+import { setAlert } from '../../actions/alertActions';
+import { registerUser } from '../../actions/authActions';
+import { useDispatch, useSelector } from 'react-redux';
 
 const Register = () => {
+	const dispatch = useDispatch();
+	const auth = useSelector((state) => state.auth);
 	const [formData, setFormData] = useState({
 		name: '',
 		email: '',
@@ -15,12 +22,14 @@ const Register = () => {
 	const onSubmit = async (e) => {
 		e.preventDefault();
 		if (password !== password2) {
-			console.log('password didnot match');
+			dispatch(setAlert('password didnot match', 'danger'));
 		} else {
-			console.log('Success');
+			dispatch(registerUser(name, email, password));
 		}
 	};
-
+	if (auth.isAuthenticated) {
+		return <Redirect to='/dashboard' />;
+	}
 	return (
 		<Fragment>
 			<h1 className='large text-primary'>Sign Up</h1>
@@ -39,7 +48,6 @@ const Register = () => {
 						name='name'
 						value={name}
 						onChange={(e) => onChange(e)}
-						required
 					/>
 				</div>
 				<div className='form-group'>
@@ -49,7 +57,6 @@ const Register = () => {
 						name='email'
 						value={email}
 						onChange={(e) => onChange(e)}
-						required
 					/>
 					<small className='form-text'>
 						This site uses Gravatar so if you want a profile image, use a
