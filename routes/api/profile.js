@@ -41,7 +41,7 @@ router.post(
 	async (req, res) => {
 		const errors = validationResult(req);
 		if (!errors.isEmpty()) {
-			return res.json({ errors: errors.array() });
+			return res.status(400).json({ errors: errors.array() });
 		}
 		const {
 			company,
@@ -74,7 +74,7 @@ router.post(
 		if (facebook) profileFields.social.facebook = facebook;
 		if (linkedin) profileFields.social.linkedin = linkedin;
 		if (instagram) profileFields.social.instagram = instagram;
-		console.log(profileFields);
+
 		try {
 			let profile = await Profile.findOne({ user: req.user.id });
 			if (profile) {
@@ -93,7 +93,6 @@ router.post(
 			console.error(err.message);
 			return res.status(500).send('server error');
 		}
-		res.send('data is ok');
 	}
 );
 
@@ -159,7 +158,7 @@ router.put(
 	async (req, res) => {
 		const errors = validationResult(req);
 		if (!errors.isEmpty()) {
-			return res.json({ errors: errors.array() });
+			return res.status(400).json({ errors: errors.array() });
 		}
 		const {
 			title,
@@ -226,7 +225,7 @@ router.put(
 	async (req, res) => {
 		const errors = validationResult(req);
 		if (!errors.isEmpty()) {
-			return res.json({ errors: errors.array() });
+			return res.status(400).json({ errors: errors.array() });
 		}
 		const {
 			school,

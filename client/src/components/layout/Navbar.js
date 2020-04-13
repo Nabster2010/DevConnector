@@ -20,7 +20,10 @@ const Navbar = () => {
 					</li>
 
 					<li>
-						<Link to='/dashboard'>Dashboard</Link>
+						<Link to='/dashboard'>
+							<i className='fas fa-user'></i>
+							<span className='hide-sm'> Dashboard</span>
+						</Link>
 					</li>
 					<li>
 						<Link to='/logout' onClick={() => dispatch(logout())}>
