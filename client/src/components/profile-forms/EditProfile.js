@@ -1,6 +1,6 @@
 import React, { useState, Fragment, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { createProfile, getCurrentProfile } from '../../actions/profileActions';
+import { createProfile } from '../../actions/profileActions';
 import { useHistory, Link } from 'react-router-dom';
 
 const EditProfile = () => {
@@ -37,9 +37,8 @@ const EditProfile = () => {
 		linkedin,
 		instagram,
 	} = formData;
-	// use effect hook
+
 	useEffect(() => {
-		dispatch(getCurrentProfile());
 		setFormData({
 			company: loading || !profile.company ? '' : profile.company,
 			website: loading || !profile.website ? '' : profile.website,
@@ -47,14 +46,25 @@ const EditProfile = () => {
 			status: loading || !profile.status ? '' : profile.status,
 			skills: loading || !profile.skills ? '' : profile.skills.join(','),
 			bio: loading || !profile.bio ? '' : profile.bio,
-			githubusername: loading || !profile.company ? '' : profile.company,
+			githubusername:
+				loading || !profile.githubusername ? '' : profile.githubusername,
 			youtube: loading || !profile.social ? '' : profile.social.youtube,
 			twitter: loading || !profile.social ? '' : profile.social.twitter,
 			facebook: loading || !profile.social ? '' : profile.social.facebook,
 			linkedin: loading || !profile.social ? '' : profile.social.linkedin,
 			instagram: loading || !profile.social ? '' : profile.social.instagram,
 		});
-	}, [loading]);
+	}, [
+		loading,
+		profile.company,
+		profile.website,
+		profile.location,
+		profile.status,
+		profile.bio,
+		profile.githubusername,
+		profile.social,
+		profile.skills,
+	]);
 
 	const onSubmit = (e) => {
 		e.preventDefault();
