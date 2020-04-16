@@ -56,7 +56,7 @@ router.get('/:post_id', auth, async (req, res) => {
 		if (!post) {
 			return res.status(404).json({ msg: 'Post not found' });
 		}
-		return res.json({ post: post });
+		return res.json(post);
 	} catch (err) {
 		console.error(err);
 		return res.status(404).json({ msg: 'There is no Post' });
@@ -85,12 +85,13 @@ router.delete('/:post_id', auth, async (req, res) => {
 	}
 });
 
-//@route    PUT api/posts/like/:post_id
+//@route    PUT api/posts/like/:id
 //@Desc     like a Post
 //@access   Private
-router.put('/like/:post_id', auth, async (req, res) => {
+router.put('/like/:id', auth, async (req, res) => {
 	try {
-		const post = await Post.findById(req.params.post_id);
+		const post = await Post.findById(req.params.id);
+
 		if (!post) {
 			return res.status(404).json({ msg: 'Post Not Found' });
 		}
@@ -111,12 +112,12 @@ router.put('/like/:post_id', auth, async (req, res) => {
 	}
 });
 
-//@route    PUT api/posts/unlike/:post_id
+//@route    PUT api/posts/unlike/:id
 //@Desc     like a Post
 //@access   Private
-router.put('/unlike/:post_id', auth, async (req, res) => {
+router.put('/unlike/:id', auth, async (req, res) => {
 	try {
-		const post = await Post.findById(req.params.post_id);
+		const post = await Post.findById(req.params.id);
 		if (!post) {
 			return res.status(404).json({ msg: 'Post Not Found' });
 		}

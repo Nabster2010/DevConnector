@@ -1,5 +1,8 @@
 import React, { useEffect, Fragment, useLayoutEffect } from 'react';
-import { getProfileById } from '../../actions/profileActions';
+import {
+	getProfileById,
+	getCurrentProfile,
+} from '../../actions/profileActions';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams, Link } from 'react-router-dom';
 import Spinner from '../layout/Spinner';
@@ -9,14 +12,14 @@ import ProfileExperience from './ProfileExperience';
 import ProfileEducation from './ProfileEducation';
 import ProfileGithup from './ProfileGithup';
 const Profile = () => {
-	let url_id = useParams();
+	let { id } = useParams();
 	const profileState = useSelector((state) => state.profile);
 	const auth = useSelector((state) => state.auth);
 	const { profile, loading } = profileState;
 	const dispatch = useDispatch();
 	useEffect(() => {
-		dispatch(getProfileById(url_id.id));
-	}, [getProfileById, url_id]);
+		dispatch(getProfileById(id));
+	}, [id]);
 	return (
 		<Fragment>
 			{profile === null || loading ? (
@@ -64,11 +67,8 @@ const Profile = () => {
 						<h2 className='text-primary my-1'>
 							<i className='fab fa-github'></i> Github Repos
 						</h2>
-						{profile.githubusername ? (
-							<ProfileGithup user={profile.githubusername} />
-						) : (
-							<h4> No Githup User </h4>
-						)}
+
+						<ProfileGithup user={profile.githubusername} />
 					</div>
 				</Fragment>
 			)}

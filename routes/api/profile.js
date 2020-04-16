@@ -106,8 +106,7 @@ router.get('/', async (req, res) => {
 		const profiles = await Profile.find().populate('user', ['name', 'avatar']);
 		return res.json(profiles);
 	} catch (err) {
-		console.error(err.message);
-		return res.status(500).send('server error');
+		res.status(400).json({ msg: 'Profile not found' });
 	}
 });
 
@@ -123,7 +122,6 @@ router.get('/user/:user_id', async (req, res) => {
 		if (!profile) res.status(400).json({ msg: 'Profile not found' });
 		return res.json(profile);
 	} catch (err) {
-		console.error(err.message);
 		return res.status(400).json({ msg: 'Profile not found' });
 	}
 });

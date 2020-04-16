@@ -25,6 +25,10 @@ export const getCurrentProfile = () => async (dispatch) => {
 	} catch (err) {
 		console.log(err.response);
 		dispatch({
+			type: CLEAR_PROFILE,
+			payload: { msg: err.response.statusText, status: err.response.status },
+		});
+		dispatch({
 			type: PROFILE_ERROR,
 			payload: { msg: err.response.statusText, status: err.response.status },
 		});
@@ -57,22 +61,25 @@ export const getProfileById = (user_id) => async (dispatch) => {
 	} catch (err) {
 		console.log(err.response);
 		dispatch({
+			type: CLEAR_PROFILE,
+			payload: { msg: err.response.statusText, status: err.response.status },
+		});
+		dispatch({
 			type: PROFILE_ERROR,
 			payload: { msg: err.response.statusText, status: err.response.status },
 		});
 	}
 };
 
-export const getRepos = (githup_username) => async (dispatch) => {
+export const getRepos = (user) => async (dispatch) => {
 	try {
-		const res = await axios.get(`/api/profile/githup/${githup_username}`);
+		const res = await axios.get(`/api/profile/githup/${user}`);
 
 		dispatch({
 			type: GET_REPOS,
 			payload: res.data,
 		});
 	} catch (err) {
-		console.log(err.response);
 		dispatch({
 			type: PROFILE_ERROR,
 			payload: { msg: err.response.statusText, status: err.response.status },

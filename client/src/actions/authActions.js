@@ -21,13 +21,12 @@ export const loadUser = () => async (dispatch) => {
 		};
 		try {
 			const res = await axios.get('/api/auth', config);
-			console.log(res.data);
+
 			dispatch({
 				type: USER_LOADED,
 				payload: res.data,
 			});
 		} catch (err) {
-			console.log(err.response);
 			//login fail
 			dispatch({
 				type: AUTH_ERROR,
@@ -62,8 +61,6 @@ export const registerUser = (name, email, password) => async (dispatch) => {
 		dispatch(loadUser());
 	} catch (err) {
 		const errors = err.response.data.errors;
-		console.log(errors);
-
 		errors.forEach((error) => {
 			dispatch(setAlert(error.msg, 'danger'));
 

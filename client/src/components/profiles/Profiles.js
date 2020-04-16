@@ -1,4 +1,4 @@
-import React, { useEffect, Fragment } from 'react';
+import React, { useEffect, Fragment, useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getAllProfiles } from '../../actions/profileActions';
 import Spinner from '../layout/Spinner';
@@ -9,7 +9,7 @@ const Profiles = () => {
 	const { profiles, loading } = profileState;
 	useEffect(() => {
 		dispatch(getAllProfiles());
-	}, [getAllProfiles]);
+	}, []);
 	return (
 		<Fragment>
 			{loading ? (

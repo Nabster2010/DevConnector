@@ -6,7 +6,9 @@ const ProfileGithup = ({ user }) => {
 	const profileState = useSelector((state) => state.profile);
 	const { repos } = profileState;
 	const dispatch = useDispatch();
-	useEffect(() => dispatch(getRepos(user)), [user]);
+	useEffect(() => {
+		dispatch(getRepos(user));
+	}, [user, getRepos]);
 
 	return (
 		<Fragment>
